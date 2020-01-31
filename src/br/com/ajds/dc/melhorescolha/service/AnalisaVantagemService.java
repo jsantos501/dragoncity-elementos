@@ -21,10 +21,10 @@ public class AnalisaVantagemService {
 			Dragon resistenteForte = buscarDragonComAdvantage(rival, aliados, analise);
 			analise.setAliado(resistenteForte);
 			if(resistenteForte == null ) {
-//				Dragon muitoDanoPoucaDef = buscarDragonSomenteForte(rival, aliados, analise);
-//				Dragon muitaDefPoucoDano = buscarDragonSomenteDef(rival, aliados, analise);
-//				analise.setAliadoMuitaDefPoucoDano(muitaDefPoucoDano);
-//				analise.setAliadoMuitoDanoPoucaDef(muitoDanoPoucaDef);
+				Dragon muitoDanoPoucaDef = buscarDragonSomenteForte(rival, aliados, analise);
+				Dragon muitaDefPoucoDano = buscarDragonSomenteDef(rival, aliados, analise);
+				analise.setAliadoMuitaDefPoucoDano(muitaDefPoucoDano);
+				analise.setAliadoMuitoDanoPoucaDef(muitoDanoPoucaDef);
 				
 			}		
 			resposta.getAnalises().add(analise);
@@ -64,12 +64,20 @@ public class AnalisaVantagemService {
 		return false;
 	}
 
+	private boolean verificarDragonForteSemDef(List<Elemento> elementos, Elemento tipoPrimario, Analise analise) {
+		for (Elemento ele : elementos) {
+			if (ele != null && ele.vantagem(tipoPrimario)) {
+				analise.setGolpeRecomendadoPoucaDef(ele);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	
 	private Dragon buscarDragonSomenteForte(Dragon rival, List<Dragon> aliados, Analise analise) {
 		for (Dragon dragon : aliados) {
-
-			if (verificarDragonResistente(dragon.getTipoPrimario(), rival.getElementos())
-					&& verificarDragonForte(dragon.getElementos(), rival.getTipoPrimario(), analise)) {
-				aliados.remove(dragon);
+			if (verificarDragonForteSemDef(dragon.getElementos(), rival.getTipoPrimario(), analise)) {
 				return dragon;
 			}
 		}
@@ -79,9 +87,7 @@ public class AnalisaVantagemService {
 	private Dragon buscarDragonSomenteDef(Dragon rival, List<Dragon> aliados, Analise analise) {
 		for (Dragon dragon : aliados) {
 
-			if (verificarDragonResistente(dragon.getTipoPrimario(), rival.getElementos())
-					&& verificarDragonForte(dragon.getElementos(), rival.getTipoPrimario(), analise)) {
-				aliados.remove(dragon);
+			if (verificarDragonResistente(dragon.getTipoPrimario(), rival.getElementos()) ) {
 				return dragon;
 			}
 		}

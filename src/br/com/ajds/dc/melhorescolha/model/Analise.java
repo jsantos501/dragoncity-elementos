@@ -7,6 +7,7 @@ public class Analise {
 	Dragon rival;
 	Dragon aliado;
 	Elemento golpeRecomendado;
+	Elemento golpeRecomendadoPoucaDef;
 	Dragon aliadoMuitoDanoPoucaDef;
 	Dragon aliadoMuitaDefPoucoDano;
 	
@@ -41,5 +42,12 @@ public class Analise {
 	public void setAliadoMuitaDefPoucoDano(Dragon aliadoMuitaDefPoucoDano) {
 		this.aliadoMuitaDefPoucoDano = aliadoMuitaDefPoucoDano;
 	}
+	public Elemento getGolpeRecomendadoPoucaDef() {
+		return golpeRecomendadoPoucaDef;
+	}
+	public void setGolpeRecomendadoPoucaDef(Elemento golpeRecomendadoPoucaDef) {
+		this.golpeRecomendadoPoucaDef = golpeRecomendadoPoucaDef;
+	}
+	
 	
 }
