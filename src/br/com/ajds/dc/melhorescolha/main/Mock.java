@@ -3,6 +3,7 @@ package br.com.ajds.dc.melhorescolha.main;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.ajds.dc.melhorescolha.model.Analise;
 import br.com.ajds.dc.melhorescolha.model.Dragon;
 import br.com.ajds.dc.melhorescolha.model.Resposta;
 import br.com.ajds.dc.melhorescolha.service.AnalisaVantagemService;
@@ -49,32 +50,34 @@ public class Mock {
 		
 		resposta.getAnalises().stream().forEach(reg -> {
 			if(reg.getRival() != null) {
-				System.out.printf("rival: %s - elemento: %s \n",
-						reg.getRival().getNome(),
-						reg.getRival().getElementos());
+				imprimirDragao("rival", reg.getRival().getNome(), reg.getRival().getElementos());
 			}
 			if(reg.getAliado() != null) {
-				System.out.printf("aliado: %s - elemento: %s \n",
-						reg.getAliado().getNome(),
-						reg.getAliado().getElementos());
+				imprimirDragao("aliado", reg.getAliado().getNome(), reg.getAliado().getElementos());
+
 				System.out.printf("golpe recomendado: %s\n\n",reg.getGolpeRecomendado());
 			}else {
 				System.out.println("aliado: não encontrado");
-				System.out.println("\taliado somente forte sem def");
-				System.out.printf("\taliado: %s - elemento: %s \n",
-					reg.getAliadoMuitoDanoPoucaDef().getNome(),
-					reg.getAliadoMuitoDanoPoucaDef().getElementos());
-				System.out.printf("\tgolpe recomendado: %s\n\n",reg.getGolpeRecomendadoPoucaDef());
-		
-				System.out.println("\taliado somente defensor sem dano alto");
-				System.out.printf("\taliado: %s - elemento: %s \n\n",
-					reg.getAliadoMuitaDefPoucoDano().getNome(),
-					reg.getAliadoMuitaDefPoucoDano().getElementos());
-			
+				if(reg.getAliadoMuitoDanoPoucaDef() != null) {
+					System.out.println("\taliado somente forte sem def");
+					imprimirDragao("\taliado", reg.getAliadoMuitoDanoPoucaDef().getNome(), reg.getAliadoMuitoDanoPoucaDef().getElementos());
+					System.out.printf("\tgolpe recomendado: %s\n\n",reg.getGolpeRecomendadoPoucaDef());
+				}
+				if(reg.getAliadoMuitaDefPoucoDano() != null) {
+					System.out.println("\taliado somente defensor sem dano alto");
+					imprimirDragao("\taliado", reg.getAliadoMuitaDefPoucoDano().getNome(), reg.getAliadoMuitaDefPoucoDano().getElementos());
+					System.out.println("");
+				}
 			}
 		});
 		
 		
+	}
+
+	private static void imprimirDragao(String lado, String nome, List<Elemento> elementos) {
+		System.out.printf(lado+": %s - elemento: %s \n",
+				nome,
+				elementos);
 	}
 
 }
