@@ -38,4 +38,9 @@ public enum Elemento {
 	public boolean vuneravel(Elemento elemento) {
 		return this.name().equals(elemento.primeiraFraqueza) || this.name().equals(elemento.segundaFraqueza);
 	}
+	
+	public boolean vantagem(Elemento elemento) {
+		
+		return this.primeiraFraqueza.equals(elemento.name()) || this.segundaFraqueza.equals(elemento.name());
+	}
 }

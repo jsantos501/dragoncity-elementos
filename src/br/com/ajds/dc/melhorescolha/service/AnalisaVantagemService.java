@@ -56,7 +56,7 @@ public class AnalisaVantagemService {
 
 	private boolean verificarDragonForte(List<Elemento> elementos, Elemento tipoPrimario, Analise analise) {
 		for (Elemento ele : elementos) {
-			if (ele != null && ele.vuneravel(tipoPrimario)) {
+			if (ele != null && ele.vantagem(tipoPrimario)) {
 				analise.setGolpeRecomendado(ele);
 				return true;
 			}
